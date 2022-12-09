@@ -1,0 +1,284 @@
+<div class="container">
+
+
+    <div class="row bg-light" style="margin-bottom: 7px;margin-top: -8px">
+        <div class="col-sm-12  m-t-10 d-flex justify-content-between p-3 align-items-center">
+            <div class="btn-group float-right m-b-10">
+                <h4 class="page-title" style="font-size: 18px;padding-right: 5px; ">Manage Products</h4>
+            </div>
+
+
+
+            <div class="btn-group float-right m-b-10">
+
+                <button class="btn btn-block btn-radius m-b-5 bg-success" type="submit" data-bs-toggle="modal"
+                    data-bs-target="#productmodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                    style=" color: white;" (click)="addproduct()">
+                    Add
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- search -->
+    <div class="row" style="margin-bottom: 7px;margin-top: -8px ;">
+        <div class="col-sm-12  m-t-10" style="background-color: white">
+            <div class="btn-group float-right m-b-10">
+                <div class="col-12">
+                    <div class="input-group mx-5 mb-3">
+                        <span class="input-group-text mt-5 ms-5" id="inputGroup-sizing-default">Search</span>
+                        <input type="text" [(ngModel)]="ProductName" placeholder="search" class="form-control mt-5 me-5"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--add newproduct    -->
+
+
+    <div class="modal fade" id="productmodal" data-bs-backdrop="static" data-bs-static="true" data-bs-keyboard="false"
+        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mdal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeClick()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-6 p-2 m-auto">
+                        <form [formGroup]="productForm" id="productForm" (ngSubmit)="onSubmit(productForm.value)">
+                            <input type="text" hidden class="form-control" id="id" name="id">
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 form-group">
+                                        <label class="control-label">Product name</label>
+                                        &nbsp;<span style="color:red;font-weight: bold">*</span>
+                                        <input class="form-control input-sm" formControlName="name" type="text"
+                                            placeholder="Product name" [class.is-invalid]="productForm.get('name')?.invalid &&
+                                    productForm.get('name')?.touched">
+
+                                        <small class="text-danger"
+                                            [class.d-none]="productForm.get('name')?.valid || productForm.get('name')?.untouched">
+                                            Name
+                                            is required </small>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 form-group">
+                                        <label class="control-label" for="categoryId">Category</label>
+                                        <select formControlName="categoryId" placeholder="--- Select category ---">
+                                            <option *ngFor="let cat of categoryList" [value]="cat.id">
+                                                <span>{{cat.name}}</span>
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 form-group">
+                                        <label for="price" class=" mb-1">price</label>
+                                        <input type="number" class="form-control" id="price" formControlName="price"
+                                            placeholder="Enter price" [class.is-invalid]="productForm.get('price')?.invalid &&
+                                        productForm.get('price')?.touched">
+                                        <small class="text-danger"
+                                            [class.d-none]="productForm.get('price')?.valid || productForm.get('price')?.untouched">
+                                            price
+                                            is required </small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 form-group">
+                                        <label for="price" class=" mb-1">Quantity</label>
+                                        <input type="number" class="form-control" id="quantity"
+                                            formControlName="quantity" placeholder="Enter Quantity" [class.is-invalid]="productForm.get('quantity')?.invalid &&
+                                        productForm.get('quantity')?.touched">
+                                        <small class="text-danger"
+                                            [class.d-none]="productForm.get('quantity')?.valid || productForm.get('quantity')?.untouched">
+                                            quantity
+                                            is required </small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 form-group">
+                                        <label for="price" class=" mb-1">Size</label>
+                                        <input type="text" class="form-control" id="value" formControlName="value"
+                                            placeholder="Enter Size" [class.is-invalid]="productForm.get('value')?.invalid &&
+                                        productForm.get('value')?.touched">
+                                        <small class="text-danger"
+                                            [class.d-none]="productForm.get('value')?.valid || productForm.get('value')?.untouched">
+                                            size
+                                            is required </small>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 form-group">
+                                        <label class="control-label">Description</label>
+                                        <textarea class="form-control" formControlName="description"
+                                            placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <!-- image -->
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 form-group">
+                                        <label class="control-label">Image</label>
+                                        &nbsp;<span style="color:red;font-weight: bold">*</span><br>
+                                        <img src="{{imageName == ''?  imageUrl + defImage : imageUrl + imageName}}"
+                                            style="width:210px;height:170px;">
+                                        <input type="file" style="padding-top: 15px" id="ImageFile" name="ImageFile"
+                                            class="form-control-file" accept="image/*"
+                                            (change)="uploadProductImage($event)" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <br>
+                            <button class="btn btn-block btn-radius m-b-5 bg-success" type="submit"
+                                style=" color: white;">
+                                Save
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- display products -->
+    <div class="row " style="margin-top:30px; background-color: white;">
+        <div class="col-12">
+            <table class="table table-hover " style="width: 100%">
+                <thead>
+                    <tr style="text-align: center">
+                        <th style="min-width:80px">Image </th>
+                        <th style="min-width: 210px;">Name </th>
+                        <th style="min-width: 80px;">Category </th>
+                        <th style="min-width: 80px;">Quantity </th>
+                        <th style="min-width: 80px;">Sizes </th>
+                        <th style="min-width: 80px;">Price</th>
+
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center" *ngFor="let product of products |filter:ProductName">
+                        <td><img src="{{imageUrl + product.pictureUrl}}" style="width:70px;height:50px;border:1px solid"
+                                class="img-responsive"></td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.category}}</td>
+                        <td>
+                            <div>
+                                {{product.quantity}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{product.value}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{product.price | currency}}
+                            </div>
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-outline-success m-1" data-bs-toggle="modal"
+                                data-bs-target="#productmodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                                (click)="getProductForEdit(product.id)">Edit</button>
+
+                            <a style="font-size:14px;cursor: pointer;" data-bs-toggle="modal"
+                                data-bs-target="#categorymodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                                class="btn btn-outline-success m-1" (click)="getProductDetails(product.id)">Details
+
+                            </a>
+
+                            <button type="button" class="btn btn-outline-danger m-1"
+                                (click)="deleteProduct(product.id)">Delete</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- show when emplty data -->
+            <div class="row" *ngIf="products?.length == 0">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body text-center" style="color:darkgrey">
+                            No products found
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- display product Details -->
+
+    <div class="modal fade" id="categorymodal" data-bs-backdrop="static" data-bs-static="true" data-bs-keyboard="false"
+        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mdal-xl" role="document" style="max-width:50%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeClick()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-6 p-2 m-auto">
+                        <div class="modal-body custom-modal">
+
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="col-lg-6 col-md-4" style="margin-bottom: 10px;">
+                                        <label>Name : &nbsp;</label> {{productDetails?.name}}
+                                    </div>
+                                    <div class="col-lg-6 col-md-4" style="margin-bottom: 10px;">
+                                        <label>Category : &nbsp;</label> {{productDetails?.category}}
+                                    </div>
+                                    <div class="col-lg-6 col-md-4" style="margin-bottom: 10px; text-align: left;">
+                                        <label>Quantity : &nbsp;</label> {{productDetails?.quantity}}
+                                    </div>
+                                    <div class="col-lg-6 col-md-4" style="margin-bottom: 10px; text-align: left;">
+                                        <label>Price : &nbsp;</label> {{productDetails?.price | currency}}
+                                    </div>
+                                    <div class="col-lg-6 col-md-4" style="margin-bottom: 10px; text-align: left;">
+                                        <label>Discount : &nbsp;</label> {{productDetails?.discount | currency}}
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <img src="{{imageUrl + productDetails?.pictureUrl}}"
+                                        style="width:170px;height:150px;border:1px solid" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="margin-bottom: 10px; text-align: left;">
+                                    <label>Description : &nbsp;</label> {{productDetails?.description}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

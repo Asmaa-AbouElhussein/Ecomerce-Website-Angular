@@ -1,0 +1,38 @@
+
+<section class="p-5">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let product of productListOfCat| filter: ProductName
+        ">
+            <div class="card mb-4 product-wap rounded-0" >
+                <div class="card rounded-0">                  
+                    {{product.pictureUrl}} 
+                         <img class="card-img rounded-0 img-fluid imgsty"
+                         src="{{image + product.pictureUrl !== null ? image + product.pictureUrl : defImage}}"
+                         onerror="this.onerror=null;this.src='../../../../../assets/img/No_Image_Available.jpg';">
+                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                        
+                        <ul class="list-unstyled ">
+                            <li>
+                            <button routerLink="/user/productdetails/{{product.id}}" type="button" class="btn btn-success">View</button>
+                        </li>
+                            <li>
+                                <button (click)="addItemToBasket(product)"   type="button" class="btn btn-success fa fa-shopping-cart mr-2" ></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="shop-single.html" class="h3 text-decoration-none">Oupidatat non</a>
+                    <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                        <li>{{product.name}}</li>
+                    </ul>
+                    <p class="text-center mb-0"> {{product.price | currency}}</p>
+                    <p class="text-center mb-0">Size:{{product.value}}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-spinner></app-spinner>

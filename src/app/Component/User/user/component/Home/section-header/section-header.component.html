@@ -1,0 +1,74 @@
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+            GPG
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+            id="templatemo_main_nav">
+            <div class="flex-fill">
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/home">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="user/shop">shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="user/contactUs">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar align-self-center d-flex">
+              
+                <div class="d-flex search col-lg-6 col-md-12 col-sm-12 col-12 my-4"
+                    style="align-items:center; justify-content: center">
+                    <input class="form-control me-2 " type="search" placeholder="search" aria-label="Search"
+                        [(ngModel)]="ProductName">
+                    <a routerLink="user/shop">
+                        <button class="btn  pe-1 " type="submit" style="background:#2b6777;color:white"
+                            (click)="filterProductName()"> <i class="fa fa-fw fa-search"></i></button>
+                    </a>
+
+                </div>
+
+                <a class="nav-icon position-relative text-decoration-none" routerLink="user/basket">
+                    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                    <span
+                        class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+                        {{cartItem}} </span>
+                </a>
+                <a class="nav-icon position-relative text-decoration-none">
+                    <div class="dropdown">
+                        <i class="fa fa-fw fa-user text-dark mr-3"> </i>
+                        <div class="dropdown-content">
+                            <a routerLink="user/register">Register</a>
+                            <a routerLink="user/loginUser">Login</a>
+                            <a (click)="logout()">Logout</a>
+                        </div>
+                    </div>
+                    <span
+                        class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">{{currentUser?.displayname}}</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</nav>
+<!-- Close Header -->
+
+
+
+
+
+
+

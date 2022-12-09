@@ -1,0 +1,111 @@
+<div class="container mt-5 mb-5" style="width:40%">
+  <div class="d-flex justify-content-center">
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Register new user</h1>
+      </div>
+      <div class="row">
+        <div class="form-group col-12">
+          <label for="displayname">Display Name</label>
+          <input type="text" class="form-control" id="exampleInputdisplayname" name="displayname"
+            formControlName="displayName"
+            [class.is-invalid]="registerForm.get('displayName')?.invalid && registerForm.get('displayName')?.touched">
+          <small class="text-danger"
+            [class.d-none]="registerForm.get('displayName')?.valid || registerForm.get('displayName')?.untouched"> Name
+            is required </small>
+        </div>
+        <div class="form-group col-12">
+          <label for="Email1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
+            formControlName="email"
+            [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+            <small class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']"> Email is
+              required</small>
+            <small class="text-danger" *ngIf="registerForm.get('email')?.errors?.['pattern']"> pattern is invalid
+            </small>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <label for="phoneno">Phone Number</label>
+          <input type="text" class="form-control" id="exampleInputphoneno" name="phoneno" formControlName="phoneNumber"
+            [class.is-invalid]="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched">
+          <small class="text-danger" [class.d-none]="registerForm.get('phoneNumber')?.valid
+                     || registerForm.get('phoneNumber')?.untouched"> Phone Number is required </small>
+        </div>
+        <div class="form-group col-12">
+          <label for="Password">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword" name="password"
+            formControlName="password"
+            [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          <small class="text-danger" [class.d-none]="registerForm.get('password')?.valid 
+                    || registerForm.get('password')?.untouched">password is required </small>
+        </div>
+        <div class="form-group col-12">
+          <label for="Password"> Confirm Password</label>
+          <input type="password" class="form-control" id="exampleInputconfirmPassword" name="confirmPassword"
+            formControlName="confirmPassword"
+            [class.is-invalid]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+          <!-- <small class="text-danger" [class.d-none]="registerForm.get('confirmPassword')?.valid 
+                    || registerForm.get('confirmPassword')?.untouched"> is required</small> -->
+          <small class="text-danger" *ngIf="registerForm?.errors?.['misMatch']">Confirm Password miss match
+            Password</small>
+        </div>
+      </div>
+      <div class="row" formGroupName="address">
+        <div class="form-group col-6">
+          <label for="firstname">First Name</label>
+          <input type="text" class="form-control" id="exampleInputfirstname" name="firstname"
+            formControlName="firstName"
+            [class.is-invalid]="registerForm.get('address.firstName')?.invalid && registerForm.get('address.firstName')?.touched">
+          <small class="text-danger" [class.d-none]="registerForm.get('address.firstName')?.valid
+            || registerForm.get('address.firstName')?.untouched"> First Name is required </small>
+        </div>
+        <div class="form-group col-6">
+          <label for="lastname">Last Name</label>
+          <input type="text" class="form-control" id="exampleInputlastname" name="lastname" formControlName="lastName"
+            [class.is-invalid]="registerForm.get('address.lastName')?.invalid && registerForm.get('address.lastName')?.touched">
+          <small class="text-danger" [class.d-none]="registerForm.get('address.lastName')?.valid
+            || registerForm.get('address.lastName')?.untouched"> Last Name is required </small>
+        </div>
+
+        <div class="form-group col-6">
+          <label for="street">Street</label>
+          <input type="text" class="form-control" id="exampleInputstreet" name="street" formControlName="street"
+            [class.is-invalid]="registerForm.get('address.street')?.invalid && registerForm.get('address.street')?.touched">
+          <small class="text-danger" [class.d-none]="registerForm.get('address.street')?.valid
+            || registerForm.get('address.street')?.untouched"> Street is required </small>
+        </div>
+        <div class="form-group col-6">
+          <label for="city">City</label>
+          <input type="text" class="form-control" id="exampleInputcity" name="city" formControlName="city"
+            [class.is-invalid]="registerForm.get('address.city')?.invalid && registerForm.get('address.city')?.touched">
+          <small class="text-danger" [class.d-none]="registerForm.get('address.city')?.valid
+            || registerForm.get('address.city')?.untouched"> is required </small>
+        </div>
+        <div class="form-group col-6">
+          <label for="state">State</label>
+          <input type="text" class="form-control" id="exampleInputstate" name="state" formControlName="state"
+            [class.is-invalid]="registerForm.get('address.state')?.invalid && registerForm.get('address.state')?.touched">
+          <small class="text-danger" [class.d-none]="registerForm.get('address.state')?.valid
+            || registerForm.get('address.state')?.untouched"> is required </small>
+        </div>
+        <div class="form-group col-6">
+          <label for="zipCode">Zip Code</label>
+          <input type="number" class="form-control" id="exampleInputzipCode" name="zipCode" formControlName="zipCode"
+            [class.is-invalid]="registerForm.get('address.zipCode')?.invalid && registerForm.get('address.zipCode')?.touched">
+          <small class="text-danger" [class.d-none]="registerForm.get('address.zipCode')?.valid
+            || registerForm.get('address.zipCode')?.untouched"> is required </small>
+        </div>
+      </div>
+
+      <div class=" col-12" style=" display: grid; padding-top: 15px;">
+        <button class="btn btn-lg  btn-block" type="submit" style="background-color:#69bb7e;color: white;">
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

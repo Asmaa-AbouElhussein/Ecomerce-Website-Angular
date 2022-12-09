@@ -1,0 +1,44 @@
+<div class="container mt-2 mb-5">
+
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card-body text-center" style="color:darkgrey">
+                <p>  No orders found</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container mt-5 mb-5">
+    <table class="table table-hover">
+        <thead>
+            <th scope="col" class="bg-light align-middle">
+                Order number
+            </th>
+            <th scope="col" class="bg-light align-middle">
+                Date
+            </th>
+            <th scope="col" class="bg-light align-middle">
+                Total amount
+            </th>           
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders" class="align-middle"  style="cursor: pointer;">
+                (click)="goToOrderDetails(order)" 
+                <td class="align-middle"><strong>
+                    #{{order.id}} 
+                </strong></td>
+                <td class="align-middle"><strong>
+                    {{order.orderDate | date:'dd/MM/yyyy, h:mm a'}} 
+                </strong></td>
+                <td class="align-middle"><strong>
+                    {{order.totalAmount | currency}} 
+                </strong></td>                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

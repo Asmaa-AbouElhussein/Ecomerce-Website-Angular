@@ -1,0 +1,142 @@
+<div class="row" style="margin-bottom: 7px;margin-top: -8px">
+    <div class="col-sm-12  m-t-10">
+        <h4 class="page-title" style="font-size: 18px;padding-right: 5px; ">Manage orders</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="table-responsive">
+                    <div class="col-12">
+                        <table class="table table-hover " style="width: 100%">
+                            <thead>
+                                <tr style="text-align: center">
+                                    <th style="min-width:80px">Id </th>
+                                    <th style="min-width: 159px;">User name </th>
+                                    <th style="min-width: 100px;">Order date </th>
+                                    <th style="min-width: 100px;">Total amount </th>
+                                    <th style="min-width: 100px;"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order of order?.data">
+                                    <td>{{order.id}}</td>
+                                    <td>{{order.username}}</td>
+                                    <td>{{order.orderDate | date:'dd/MM/yyyy'}} </td>
+                                    <td>{{order.totalAmount | currency}}</td>
+
+                                    <td>
+                                        <a style="font-size:14px;cursor: pointer; border-radius: 2rem;"
+                                            data-bs-toggle="modal" data-bs-target="#categorymodal"
+                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                            class="btn btn-secondary text-white rounded-Pill"
+                                            (click)="getOrderItems(order.id)">Details
+
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <!-- show when emplty data -->
+                        <div class="row" *ngIf="order?.data.length == 0">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-body text-center" style="color:darkgrey">
+                                        No orders found
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="categorymodal" data-bs-backdrop="static" data-bs-static="true" data-bs-keyboard="false"
+    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mdal-xl" role="document" style="max-width:50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-6 p-2 m-auto">
+                    <div class="modal-body custom-modal">
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-4" style="margin-bottom: 10px;">
+                                <label>Order Id : &nbsp;</label> {{orderDetails?.id}}
+                            </div>
+                            <div class="col-lg-6 col-md-4" style="margin-bottom: 10px;">
+                                <label>Order date : &nbsp;</label> {{orderDetails?.orderDate | date:'dd/MM/yyyy'}}
+                            </div>
+                            <div class="col-lg-6 col-md-4" style="margin-bottom: 10px; text-align: left;">
+                                <label>User name : &nbsp;</label> {{orderDetails?.username}}
+                            </div>
+                            <div class="col-lg-6 col-md-4" style="margin-bottom: 10px; text-align: left;">
+                                <label>Total amount : &nbsp;</label> {{orderDetails?.totalAmount | currency}}
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:30px;">
+                            <div class="col-12">
+                                <table class="table table-hover " style="width: 100%">
+                                    <thead>
+                                        <tr style="text-align: center">
+                                            <th style="min-width:80px">Product image </th>
+                                            <th style="min-width: 100px;">Product name </th>
+                                            <th style="min-width: 60px;">price </th>
+
+                                            <th style="min-width: 50px;">Quantity </th>
+
+                                            <th style="min-width: 70px;">Total </th>
+                                            <th style="min-width: 60px;">Size </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="text-align: center"
+                                            *ngFor="let orderItem of orderDetails?.orderItems">
+                                            <td><img src="{{imageUrl + orderItem.pictureUrl}}"
+                                                    style="width:70px;height:50px;border:1px solid"
+                                                    class="img-responsive"></td>
+                                            <td>{{orderItem.productName}}</td>
+                                            <td>{{orderItem.price | currency}}</td>
+
+                                            <td>{{orderItem.quantity}}</td>
+                                            <td>{{orderItem.price * orderItem.quantity| currency}}</td>
+                                            <td>{{orderItem.productSize}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <!-- show when emplty data -->
+                                <div class="row" *ngIf="order?.data.length == 0">
+                                    <div class="col-xl-12">
+                                        <div class="card">
+                                            <div class="card-body text-center" style="color:darkgrey">
+                                                No orders found
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="container">
+
+    <div class="row bg-light" style="margin-bottom: 7px;margin-top: -8px">
+        <div class="col-sm-12  m-t-10 p-3">
+            <div class="btn-group float-right m-b-10">
+                <h4 class="page-title p-2" style="font-size: 18px;padding-right: 5px; ">Manage Users</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px; background-color: white;">
+        <div class="col-lg-4 col-md-4" style="margin-bottom: 15px;">
+            <div class="input-group mx-5 mb-3">
+                <span class="input-group-text mt-5 ms-5" id="inputGroup-sizing-default">Search</span>
+                <input type="text" [(ngModel)]="phoneNumber" placeholder="search" class="form-control mt-5 me-5"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover " style="width: 100%; margin-top:30px; background-color: white;">
+                <thead>
+                    <tr style="text-align: center">
+                        <th style="min-width:80px">Display name </th>
+                        <th style="min-width: 159px;">Email </th>
+                        <th style="min-width: 100px;">Phone number </th>
+                        <th style="min-width: 100px;">Created date </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users |filter:phoneNumber" style="text-align: center;">
+                        <td>{{user.displayName}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phoneNumber}}</td>
+                        <td>{{user.createdDate | date:'dd/MM/yyyy'}} </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <!-- show when emplty data -->
+            <div class="row" *ngIf="users?.length == 0">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body text-center" style="color:darkgrey">
+                            No users found
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

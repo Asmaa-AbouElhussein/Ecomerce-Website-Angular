@@ -1,0 +1,65 @@
+<div class="container mt-2">
+
+    <div class="row" *ngIf="basketlist.items.length == 0">
+        <div class="col-xl-12">
+            <div class="card-body text-center" style="color:darkgrey">
+                <p>There are no items in your basket</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="basketlist">
+        <div class="col-xl-12">
+            <div class="card-body text-center" style="color:darkgrey">
+
+                <h4> Welcom In your basket </h4>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="pd-5">
+            <div class="row">
+
+                <div class="col-12 py-5 mb-1">
+
+                    <app-cart (onTotalPriceChange)="updateTotalPrice($event)"></app-cart>
+
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-6 py-5 mb-1">
+                    <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">
+                        Order Summary
+                    </div>
+                    <div class="p-4">
+                        <p class="font-italic mb-4">Shipping costs 20$ will be added depending on choices made during
+                            checkout </p>
+                        <ul class="list-unstyled mb-4">
+
+                            <li class="d-flex justify-content-between py-3 border-bottom">
+
+                                <strong class="text-muted">Total amount</strong>
+                                <strong>{{recevedTotalPrice |currency}}</strong>
+                            </li>
+
+                            <li class="d-flex justify-content-between py-3 border-bottom">
+
+                                <strong class="text-muted">Total amount After Shipping costs</strong>
+                                <strong>{{recevedTotalPrice +20 |currency}}</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-6 offset-6">
+                    <button class="btn btn-outline-primary py-2 btn-block" (click)="submitOrder()"
+                        routerLink="/user/CheckSuccesComponent">
+                        Pyment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

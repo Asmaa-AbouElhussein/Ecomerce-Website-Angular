@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+
+      <div class="card my-5">
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" class="card-body p-lg-5"
+          style="background-color: white;">
+
+
+          <div class="text-center">
+            <img src="../../../../../assets/img/admin.jpg"
+              class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="150px" alt="profile">
+          </div>
+          <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">Login Admin </h1>
+          </div>
+
+          <div class="mb-3">
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+
+            <div class="text-danger" *ngIf="!loginForm.controls['email'].valid && 
+                loginForm.controls['email']?.touched"> Please enter your email</div>
+
+          </div>
+
+          <div class="mb-3">
+            <input type="password" class="form-control" id="password" placeholder="password" formControlName="password">
+            <div class="text-danger"
+              *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password']?.touched">
+              Please enter your password</div>
+
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-block btn-radius m-b-5 bg-success text-white">Login</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

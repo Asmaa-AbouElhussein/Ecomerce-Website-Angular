@@ -1,0 +1,94 @@
+<div class="col-12 py-5 mb-1">
+
+    <button type="button" class="btn btn-success" (click)="clearBasket()">Clear Cart</button>
+</div>
+<ng-container>
+    <div class="table-responsive ">
+        <table class="table">
+            <thead>
+                <th scope="col">
+                    Product
+                </th>
+                <th scope="col">
+                    Size
+                </th>
+                <th scope="col">
+                    price
+                </th>
+                <th scope="col">
+                    Quantity
+                </th>
+                <th scope="col">
+                    Total
+                </th>
+                <th scope="col">
+                    Remove
+                </th>
+
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of basketItems.items let index=index">
+                    <th scope="row">
+                        <div class="p-2">
+                            <img src="{{imageUrl + item.pictureUrl}}" alt="{{item.productName}}" class="img-fluid"
+                                style="max-height: 50px;max-width: 50px;">
+                            <div class="ml-3 d-inline-block align-middle">
+                                <h5 class="mb-0" style="font-size: 18px;">
+                                    <a class="text-dark">
+                                    </a>
+                                </h5>
+                                <span class="text-muted font-weight-normal font-italic d-block"
+                                    style="font-size: 12px;">
+                                    {{item.category}}
+                                </span>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle">
+                        <ul>
+                            <li>{{item.value}}</li>
+                        </ul>
+
+                    </td>
+
+
+                    <td class="align-middle">
+
+                        {{item.price | currency}}
+                    </td>
+
+                    <td class="align-middle">
+
+                        <i (click)="decrementQuantity(index)" class="fa fa-minus-circle text-warning mr-2"
+                            style="cursor: pointer;font-size: 2em;"></i>
+                        <span class="font-weight-bold" style="font-size: 1.5em;"> {{item.quantity}}</span>
+                        <i (click)="incrementQuantity(index)" class="fa fa-plus-circle text-warning mx-2"
+                            style="cursor: pointer;font-size: 2em;"></i>
+
+                    </td>
+
+                    <td class="align-middle">
+                        <div class="d-flex align-item-center">
+                            <span class="font-weight-bold">
+                                <!-- total price -->
+                                {{item.price * item.quantity |currency}}
+                            </span>
+                        </div>
+                    </td>
+
+                    <td class="align-middle text-center">
+                        <a class="text-danger">
+                            <i (click)="removeBasketItem(index)" class="fa fa-trash" style="font-size: 2em;"
+                                style="cursor: pointer;font-size: 2em;"></i>
+                        </a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</ng-container>
+<div style="background-color: red;">
+
+</div>

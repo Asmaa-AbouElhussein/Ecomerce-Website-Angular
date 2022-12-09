@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row" style="margin-bottom: 7px;margin-top: -8px">
+        <div class="col-sm-12  m-t-10 d-flex justify-content-between p-3 align-items-center">
+            <div class="btn-group float-right m-b-10">
+                <h4 class="page-title" style="font-size: 18px;padding-right: 5px; ">Manage Category</h4>
+            </div>
+
+            <div class="btn-group float-right m-b-10">
+                <button class="btn btn-block btn-radius bg-success m-b-5" data-bs-toggle="modal"
+                    data-bs-target="#categorymodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                    style="color: white;" (click)="addClick()">
+                    Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body text-center">
+
+                    <!-- search -->
+
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-lg-4 col-md-4" style="margin-bottom: 15px;">
+                            <div class="input-group mx-5 mb-3">
+                                <span class="input-group-text mt-5 ms-5" id="inputGroup-sizing-default">Search</span>
+                                <input type="text" [(ngModel)]="categoryName" placeholder="search"
+                                    class="form-control mt-5 me-5" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default" />
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- display category -->
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover p-5 " style=" width: 100%;margin-top:30px; background-color: white;">
+                <thead>
+                    <tr style="text-align: center">
+                        <th style="min-width:80px">Id </th>
+                        <th style="min-width: 293px;">Category name </th>
+                        <th style="min-width: 100px;"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cat of categoryList | filter:categoryName" style="text-align: center;">
+                        <td>{{cat.id}}</td>
+                        <td>{{cat.name}}</td>
+                        <td>
+
+                            <button type="button" class="btn btn-outline-success text-dark m-1" data-bs-toggle="modal"
+                                data-bs-target="#categorymodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                                (click)="editClick(cat)">Edit</button>
+                            <button type="button" class="btn btn-outline-danger m-1"
+                                (click)="deleteCategory(cat.id)">Delete</button>
+
+
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- add category -->
+    <div class="modal fade" id="categorymodal" data-bs-backdrop="static" data-bs-static="true" data-bs-keyboard="false"
+        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mdal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeClick()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-6 p-2 m-auto" *ngIf="ActivateAddandEdit">
+                        <form #userregs="ngForm" novalidate>
+                            <input type="text" hidden class="form-control" id="id" name="id" [(ngModel)]="id">
+                            <div class="form-group">
+                                <label for="Name" class=" mb-1">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required
+                                    [class.is-invalid]="user.invalid&&user.touched" #user="ngModel" [(ngModel)]="name"
+                                    placeholder="Enter Name">
+                                <div *ngIf="user.errors&&user.touched">
+                                    <small class="text-danger" *ngIf="user.errors['required']">required</small>
+                                </div>
+
+                            </div>
+                            <div class="form-group mt-2">
+                            </div>
+                            <button type="submit" type="submit" (click)="add()" *ngIf="category.id==0">Add</button>
+                            <button type="submit" (click)="update()" *ngIf="category.id!=0"
+                                class="btn mt-5">Edite</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
